@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f9e510dd-64a4-4d42-97a6-c879b9c9df81" name="sh.nook.one" url="http://sh.nook.one:8080">
+        <fileTransfer host="sh.nook.one" port="22" rootFolder="/usr/local/tomcat8/webapps/ROOT" accessType="SFTP" password="dfcedfdddfc2dfcedfd9dfd9dfc8df84" username="root">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
