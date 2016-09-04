@@ -11,14 +11,10 @@ JDBC 驱动名及数据库 URL
 useUnicode=true&characterEncoding=utf-8 防止中文乱码
 -->
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@include file="config.jsp"%>
 <%
-    String DBUSER = "root";
-    String PASSWORD = "password";
-    String DBNAME = "surl";
-    String uri = "jdbc:mysql://localhost:3306/"+DBNAME+"?useUnicode=true&characterEncoding=utf-8";
     Connection conn = null;
     try{Class.forName("com.mysql.jdbc.Driver").newInstance();}
     catch(Exception e){out.print(e);}
     conn = DriverManager.getConnection(uri, DBUSER , PASSWORD);
-
 %>
