@@ -18,3 +18,31 @@ useUnicode=true&characterEncoding=utf-8 防止中文乱码
     catch(Exception e){out.print(e);}
     conn = DriverManager.getConnection(uri, DBUSER , PASSWORD);
 %>
+<%
+    Statement sqlcheck = conn.createStatement();
+    ResultSet check;
+    check=sqlcheck.executeQuery("SHOW TABLES LIKE 'url'");
+    if(check.next()){
+
+    }else {
+        try {
+            sqlcheck.executeUpdate("CREATE TABLE `url`(" +
+                    "`id` INT(11) NOT NULL  AUTO_INCREMENT," +
+                    "`code` VARCHAR(100) NOT NULL," +
+                    "`target` VARCHAR(400) NOT NULL," +
+                    "`date`timestamp NOT NULL default CURRENT_TIMESTAMP," +
+                    "`count` INT(10) NOT NULL DEFAULT '0'," +
+                    " PRIMARY KEY (`id`));" );
+            sqlcheck.executeUpdate(
+                    "CREATE TABLE `user` (" +
+                    "`id` INT(11) NOT NULL AUTO_INCREMENT," +
+                    "`username` char(20) NOT NULL," +
+                    "`pw` varchar(255) NOT NULL," +
+                    "`p` int(10) NOT NULL DEFAULT '1'," +
+                    "PRIMARY KEY (`id`))");
+        }catch (SQLException e){out.print(e);}
+
+    }
+    check.close();
+    sqlcheck.close();
+%>
