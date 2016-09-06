@@ -7,7 +7,7 @@
 <%@ include file="database.jsp"%>
 <html>
 <head>
-    <title>url list</title>
+    <title>shrot URL beta</title>
 </head>
 <body>
 
@@ -41,6 +41,7 @@
         <th>ID</th>
         <th>code</th>
         <th>target</th>
+        <th>date</th>
         <th>count</th>
     </tr>
     <%
@@ -49,6 +50,7 @@
             out.print("<td>"+rs.getString(1)+"</td>");
             out.print("<td><a href="+"t.jsp?c="+rs.getString(2)+">"+rs.getString(2)+"</a></td>");
             out.print("<td>"+rs.getString(3)+"</td>");
+            out.print("<td>"+rs.getString(4)+"</td>");
             out.print("<td>"+rs.getString(5)+"</td>");
             out.print("</tr>");
         }
