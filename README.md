@@ -13,3 +13,10 @@ Based on JSP &amp; MYSQL
   `count` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ```
+###后台（完全功能正在编写..）
+
+地址/index.jsp
+
+用户名：admin
+
+密码:123
