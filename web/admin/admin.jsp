@@ -41,6 +41,8 @@
     <input type="submit" value="del">
 </form>
 <%
+    }else {
+        response.sendRedirect("index.jsp");
     }
 %>
 </body>
