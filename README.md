@@ -23,7 +23,7 @@ PRIMARY KEY (`id`))
 ```
 ##后台（完全功能正在编写..）
 
-地址/index.jsp
+地址/admin/index.jsp
 
 用户名：admin
 
