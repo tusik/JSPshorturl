@@ -36,14 +36,18 @@
             response.sendRedirect("index.jsp?c=0");
         }else{
             try {
+                int count;
                 sql = conn.createStatement();
                 sql1 =conn.createStatement();
                 tmp = sql.executeQuery("SELECT id FROM url WHERE target='" + target + "'");
-                cou = sql1.executeQuery("select count(id) from url");
-                cou.next();
-                int count = Integer.parseInt(cou.getString(1));
-                code = new BASE64Encoder().encode(Integer.toString(count++).getBytes());
-                out.print(code);
+                cou = sql1.executeQuery("SELECT id from url where id = (SELECT max(id) FROM url);");
+                if(cou.next()){
+                    count = Integer.parseInt(cou.getString(1));
+                    count++;
+                }else{
+                    count=1;
+                }
+                code = new BASE64Encoder().encode(Integer.toString(count).getBytes());
                 if (tmp.next()) {
                     commond = 0;
                 } else {
