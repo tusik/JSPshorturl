@@ -44,7 +44,7 @@ useUnicode=true&characterEncoding=utf-8 防止中文乱码
             sqlcheck.executeUpdate("INSERT INTO user " +
                     "(username,pw,p)" +
                     "VALUES" +
-                    "('admin','40bd001563085fc35165329ea1ff5c5ecbdbbeef','2')");
+                    "('admin','"+DigestUtils.sha1Hex(ADMINPW+SALT)+"','2')");
         }catch (SQLException e){out.print(e);}
 
     }

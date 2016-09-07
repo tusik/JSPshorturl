@@ -7,8 +7,9 @@
 --%>
 <%
     String DBUSER = "root";
-    String PASSWORD = "dwhdssb";
+    String PASSWORD = "passwd";
     String DBNAME = "surl";
     String uri = "jdbc:mysql://localhost:3306/"+DBNAME+"?useUnicode=true&characterEncoding=utf-8";
     String SALT="";//用户加密盐
+    String ADMINPW = "123";
 %>
