@@ -25,10 +25,11 @@
     sql=conn.createStatement();
     rs=sql.executeQuery("SELECT * FROM url");
 %>
-<h1>short url beta V0.0.1</h1>
+<h1>short url beta V0.0.2</h1>
 <form method="post" action="in.jsp">
     url:<input type="text" name="url"/>
     <input type="submit" value="提交" />
+    <p>请带上http头哦(如http://code.cat)</p>
     <p><%
         if(commond==0)
             out.print("执行失败");

@@ -25,9 +25,11 @@
     String target =request.getParameter("url");
     String code=request.getParameter("code");
     Pattern p = Pattern.compile("(.*)(UPDATE|update|CREATE|create|DELETE|delete|INSERT|insert)(.*)");
+    Pattern p1 =Pattern.compile("(http://(.*)|https://(.*))");
     Matcher m = p.matcher(target);
-    if(m.matches()){
-        out.print("非法字符");
+    Matcher m1 = p1.matcher(target);
+    if(m.matches()||!m1.matches()){
+        out.print("非法字符(请按照以下格式输入地址http://code.cat)");
     }else{
         int commond =1;
         if(target==""){
