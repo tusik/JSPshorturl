@@ -25,7 +25,7 @@
     sql=conn.createStatement();
     rs=sql.executeQuery("SELECT * FROM url");
 %>
-<h1>url</h1>
+<h1>short url beta V0.0.1</h1>
 <form method="post" action="in.jsp">
     url:<input type="text" name="url"/>
     <input type="submit" value="提交" />
@@ -48,7 +48,7 @@
         while(rs.next()){
             out.print("<tr>");
             out.print("<td>"+rs.getString(1)+"</td>");
-            out.print("<td><a href="+"t.jsp?c="+rs.getString(2)+">"+rs.getString(2)+"</a></td>");
+            out.print("<td><a href="+"u/"+rs.getString(2)+">"+rs.getString(2)+"</a></td>");
             out.print("<td>"+rs.getString(3)+"</td>");
             out.print("<td>"+rs.getString(4)+"</td>");
             out.print("<td>"+rs.getString(5)+"</td>");

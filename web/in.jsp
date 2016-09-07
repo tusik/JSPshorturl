@@ -9,6 +9,8 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="sun.misc.BASE64Decoder,sun.misc.BASE64Encoder"%>
 <%@ page import="java.nio.ByteBuffer" %>
+<%@ page import="java.util.regex.Pattern" %>
+<%@ page import="java.util.regex.Matcher" %>
 <%@ include file="database.jsp"%>
 <html>
 <head>
@@ -22,34 +24,41 @@
     ResultSet cou=null;
     String target =request.getParameter("url");
     String code=request.getParameter("code");
-    int commond =1;
-    if(target==""){
-        response.sendRedirect("index.jsp?c=0");
+    Pattern p = Pattern.compile("(.*)(UPDATE|update|CREATE|create|DELETE|delete|INSERT|insert)(.*)");
+    Matcher m = p.matcher(target);
+    if(m.matches()){
+        out.print("非法字符");
     }else{
-        try {
-            sql = conn.createStatement();
-            sql1 =conn.createStatement();
-            tmp = sql.executeQuery("SELECT id FROM url WHERE target='" + target + "'");
-            cou = sql1.executeQuery("select count(id) from url");
-            cou.next();
-            int count = Integer.parseInt(cou.getString(1));
-            code = new BASE64Encoder().encode(Integer.toString(count++).getBytes());
-            out.print(code);
-            if (tmp.next()) {
-                commond = 0;
-            } else {
-                out.print("y");
-                sql.execute("INSERT INTO url(target,code) VALUES ('" + target + "','" + code + "')");
-                commond = 1;
+        int commond =1;
+        if(target==""){
+            response.sendRedirect("index.jsp?c=0");
+        }else{
+            try {
+                sql = conn.createStatement();
+                sql1 =conn.createStatement();
+                tmp = sql.executeQuery("SELECT id FROM url WHERE target='" + target + "'");
+                cou = sql1.executeQuery("select count(id) from url");
+                cou.next();
+                int count = Integer.parseInt(cou.getString(1));
+                code = new BASE64Encoder().encode(Integer.toString(count++).getBytes());
+                out.print(code);
+                if (tmp.next()) {
+                    commond = 0;
+                } else {
+                    out.print("y");
+                    sql.execute("INSERT INTO url(target,code) VALUES ('" + target + "','" + code + "')");
+                    commond = 1;
+                }
+                conn.close();
+                sql.close();
+                sql1.close();
+                tmp.close();
+                cou.close();
+                response.sendRedirect("index.jsp?c=" + commond);
             }
-            conn.close();
-            sql.close();
-            sql1.close();
-            tmp.close();
-            cou.close();
-            response.sendRedirect("index.jsp?c=" + commond);
+            catch(SQLException e1){out.print(e1);}
         }
-        catch(SQLException e1){out.print(e1);}
+
     }
 
 %>

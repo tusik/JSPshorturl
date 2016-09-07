@@ -17,6 +17,7 @@ useUnicode=true&characterEncoding=utf-8 防止中文乱码
     try{Class.forName("com.mysql.jdbc.Driver").newInstance();}
     catch(Exception e){out.print(e);}
     conn = DriverManager.getConnection(uri, DBUSER , PASSWORD);
+
 %>
 <%
     Statement sqlcheck = conn.createStatement();
