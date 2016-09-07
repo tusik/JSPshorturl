@@ -41,6 +41,10 @@ useUnicode=true&characterEncoding=utf-8 防止中文乱码
                     "`pw` varchar(255) NOT NULL," +
                     "`p` int(10) NOT NULL DEFAULT '1'," +
                     "PRIMARY KEY (`id`))");
+            sqlcheck.executeUpdate("INSERT INTO user " +
+                    "(username,pw,p)" +
+                    "VALUES" +
+                    "('admin','40bd001563085fc35165329ea1ff5c5ecbdbbeef','2')");
         }catch (SQLException e){out.print(e);}
 
     }
