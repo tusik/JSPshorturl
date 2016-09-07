@@ -24,9 +24,13 @@
                 name=cookies[i].getValue();
                 byte[] b=new BASE64Decoder().decodeBuffer(name);
                 username=new String(b);
+                out.print("welcome"+username);
             }
         }
-        out.print("welcome"+username);
+        if(username==null){
+            response.sendRedirect("index.jsp");
+        }
+
     }
 %>
 <%
