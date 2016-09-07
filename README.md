@@ -27,7 +27,10 @@ PRIMARY KEY (`id`))
 
 用户名：admin
 
-密码:123
+密码：config.jsp中修改初始化密码
+
+请自行添加salt
+
 ##伪静态
 
 在WEB-INF的urlrewrite.xml文件添加规则
