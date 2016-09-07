@@ -44,6 +44,7 @@
     <input type="text" name="id">
     <input type="submit" value="del">
 </form>
+<p><a href="logout.jsp">退出</a> </p>
 <%
     }else {
         response.sendRedirect("index.jsp");
