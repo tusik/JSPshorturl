@@ -8,6 +8,8 @@
 <html>
 <head>
     <title>shrot URL beta</title>
+    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
 
@@ -25,11 +27,14 @@
     sql=conn.createStatement();
     rs=sql.executeQuery("SELECT * FROM url");
 %>
-<h1>short url beta V0.0.2</h1>
+<div class="main">
+<h1>short url beta V0.0.3</h1>
 <form method="post" action="in.jsp">
-    url:<input type="text" name="url"/>
-    <input type="submit" value="提交" />
-    <p>请带上http头哦(如http://code.cat)</p>
+    <label for="name">url:</label>
+    <input type="text" name="url" class="form-control"/>
+    <p>请带上http头(如http://code.cat)</p>
+    <button type="submit" class="btn btn-default">提交</button>
+
     <p><%
         if(commond==0)
             out.print("执行失败");
@@ -37,7 +42,7 @@
             out.print("执行成功");
     %></p>
 </form>
-<table border="1" width="100%">
+<table border="0" width="100%" class="table table-striped table-hover">
     <tr>
         <th>ID</th>
         <th>code</th>
@@ -60,6 +65,6 @@
         rs.close();
     %>
 </table>
-
+</div>
 </body>
 </html>
