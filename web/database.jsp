@@ -10,6 +10,7 @@ JDBC 驱动名及数据库 URL
 数据库的用户名与密码，需要根据自己的设置
 useUnicode=true&characterEncoding=utf-8 防止中文乱码
 -->
+<%@page import="org.apache.commons.codec.digest.DigestUtils" %>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@include file="config.jsp"%>
 <%
@@ -36,11 +37,11 @@ useUnicode=true&characterEncoding=utf-8 防止中文乱码
                     " PRIMARY KEY (`id`));" );
             sqlcheck.executeUpdate(
                     "CREATE TABLE `user` (" +
-                    "`id` INT(11) NOT NULL AUTO_INCREMENT," +
-                    "`username` char(20) NOT NULL," +
-                    "`pw` varchar(255) NOT NULL," +
-                    "`p` int(10) NOT NULL DEFAULT '1'," +
-                    "PRIMARY KEY (`id`))");
+                            "`id` INT(11) NOT NULL AUTO_INCREMENT," +
+                            "`username` char(20) NOT NULL," +
+                            "`pw` varchar(255) NOT NULL," +
+                            "`p` int(10) NOT NULL DEFAULT '1'," +
+                            "PRIMARY KEY (`id`))");
             sqlcheck.executeUpdate("INSERT INTO user " +
                     "(username,pw,p)" +
                     "VALUES" +

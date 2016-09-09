@@ -10,12 +10,20 @@
 <html>
 <head>
     <title>Manager Panel</title>
+    <link href="css/login.css" rel="stylesheet">
+    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<form method="post" action="logincheck.jsp">
-username:<input type="text" name="username"><br>
-password:<input type="text" name="password"><br>
-    <input type="submit" value="提交" />
-</form>
+<div class="container">
+    <div class="main">
+        <form method="post" action="logincheck.jsp">
+            username:<input type="text" name="username"><br>
+            password:<input type="text" name="password"><br>
+            <button type="submit" class="btn btn-default" >登陆</button>
+        </form>
+    </div>
+
+</div>
+
 </body>
 </html>

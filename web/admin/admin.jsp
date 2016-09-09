@@ -11,8 +11,15 @@
 <html>
 <head>
     <title>Manager Panel</title>
+    <link href="css/login.css" rel="stylesheet">
+    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+    <div class="main">
+
+
+
 <%
     Cookie[] cookies = null;
     cookies=request.getCookies();
@@ -24,7 +31,7 @@
                 name=cookies[i].getValue();
                 byte[] b=new BASE64Decoder().decodeBuffer(name);
                 username=new String(b);
-                out.print("welcome"+username);
+                out.print("<h1>welcome "+username+"</h1>");
             }
         }
         if(username==null){
@@ -50,5 +57,7 @@
         response.sendRedirect("index.jsp");
     }
 %>
+    </div>
+</div>
 </body>
 </html>
