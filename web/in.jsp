@@ -22,12 +22,14 @@
     Statement sql1 = null;
     ResultSet tmp=null;
     ResultSet cou=null;
+    String ip=request.getRemoteAddr();
     String target =request.getParameter("url");
     String code=request.getParameter("code");
-    Pattern p = Pattern.compile("(.*)(UPDATE|update|CREATE|create|DELETE|delete|INSERT|insert)(.*)");
+    String tmpS =target.toUpperCase();
+    Pattern p = Pattern.compile("(.*)(UPDATE|CREATE|DELETE|INSERT)(.*)");
     Pattern p1 =Pattern.compile("(http://(.*)|https://(.*))");
-    Matcher m = p.matcher(target);
-    Matcher m1 = p1.matcher(target);
+    Matcher m = p.matcher(tmpS);
+    Matcher m1 = p1.matcher(tmpS);
     if(m.matches()||!m1.matches()){
         out.print("非法字符(请按照以下格式输入地址http://code.cat)");
     }else{
@@ -52,7 +54,7 @@
                     commond = 0;
                 } else {
                     out.print("y");
-                    sql.execute("INSERT INTO url(target,code) VALUES ('" + target + "','" + code + "')");
+                    sql.execute("INSERT INTO url(target,code,ip) VALUES ('" + target + "','" + code + "','"+ip+"')");
                     commond = 1;
                 }
                 conn.close();
