@@ -27,7 +27,7 @@
     String code=request.getParameter("code");
     String tmpS =target.toUpperCase();
     Pattern p = Pattern.compile("(.*)(UPDATE|CREATE|DELETE|INSERT)(.*)");
-    Pattern p1 =Pattern.compile("(http://(.*)|https://(.*))");
+    Pattern p1 =Pattern.compile("(HTTP://(.*)|HTTPS://(.*))");
     Matcher m = p.matcher(tmpS);
     Matcher m1 = p1.matcher(tmpS);
     if(m.matches()||!m1.matches()){
