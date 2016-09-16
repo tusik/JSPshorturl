@@ -18,24 +18,33 @@
         String password = request.getParameter("password");
         ResultSet rs;
         Statement sql=conn.createStatement();
-        try {
-            rs=sql.executeQuery("SELECT username,p FROM `user` WHERE pw='"+
-                    DigestUtils.sha1Hex(password)+"'");
-            if(rs.next()&&rs.getString(1).equals(username)){
-                out.print("login s");
-                Date cTime = new Date(session.getCreationTime());
-                Date lTime = new Date (session.getLastAccessedTime());
-                session.setAttribute("username",username);
-                session.setAttribute("power",rs.getString(2));
-                session.setAttribute("loged","true");
-                Cookie name = new Cookie("username", new BASE64Encoder().encode(username.getBytes()));
-                name.setMaxAge(60*60*24);
-                response.addCookie(name);
-                response.sendRedirect("admin.jsp");
-            }else{
-                out.print("f");
-            }
-        }catch (SQLException e){out.print(e);}
+        String tmpU =username.toUpperCase();
+        String tmpP =password.toUpperCase();
+        Matcher m = inStringCheck1.matcher(tmpU);
+        Matcher m1 = inStringCheck1.matcher(tmpP);
+        if(m.matches()||m1.matches()){
+            out.print("非法字符");
+        }else{
+            try {
+                rs=sql.executeQuery("SELECT username,p FROM `user` WHERE pw='"+
+                        DigestUtils.sha1Hex(password)+"'");
+                if(rs.next()&&rs.getString(1).equals(username)){
+                    out.print("login s");
+                    Date cTime = new Date(session.getCreationTime());
+                    Date lTime = new Date (session.getLastAccessedTime());
+                    session.setAttribute("username",username);
+                    session.setAttribute("power",rs.getString(2));
+                    session.setAttribute("loged","true");
+                    Cookie name = new Cookie("username", new BASE64Encoder().encode(username.getBytes()));
+                    name.setMaxAge(60*60*24);
+                    response.addCookie(name);
+                    response.sendRedirect("admin.jsp");
+                }else{
+                    out.print("f");
+                }
+            }catch (SQLException e){out.print(e);}
+        }
+
     }else{
         response.sendRedirect("admin.jsp");
     }

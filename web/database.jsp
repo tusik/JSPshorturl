@@ -46,6 +46,12 @@ useUnicode=true&characterEncoding=utf-8 防止中文乱码
                     "(username,pw,p)" +
                     "VALUES" +
                     "('admin','"+DigestUtils.sha1Hex(ADMINPW+SALT)+"','2')");
+            sqlcheck.executeUpdate("CREATE TABLE `iplog` (" +
+                    "    `ip` VARCHAR(20) NOT NULL," +
+                    "    `count` INT(10) NOT NULL DEFAULT '0'," +
+                    "    `id` INT(11) NOT NULL AUTO_INCREMENT," +
+                    "    `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP," +
+                    "    PRIMARY KEY (`id`))");
         }catch (SQLException e){out.print(e);}
 
     }

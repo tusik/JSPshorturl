@@ -17,9 +17,6 @@
 <body>
 <div class="container">
     <div class="main">
-
-
-
 <%
     Cookie[] cookies = null;
     cookies=request.getCookies();

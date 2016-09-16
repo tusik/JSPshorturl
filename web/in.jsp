@@ -26,10 +26,8 @@
     String target =request.getParameter("url");
     String code=request.getParameter("code");
     String tmpS =target.toUpperCase();
-    Pattern p = Pattern.compile("(.*)(UPDATE|CREATE|DELETE|INSERT)(.*)");
-    Pattern p1 =Pattern.compile("(HTTP://(.*)|HTTPS://(.*))");
-    Matcher m = p.matcher(tmpS);
-    Matcher m1 = p1.matcher(tmpS);
+    Matcher m = inStringCheck1.matcher(tmpS);
+    Matcher m1 = inStringCheck2.matcher(tmpS);
     if(m.matches()||!m1.matches()){
         out.print("非法字符(请按照以下格式输入地址http://code.cat)");
     }else{
@@ -37,6 +35,7 @@
         if(target==""){
             response.sendRedirect("index.jsp?c=0");
         }else{
+
             try {
                 int count;
                 sql = conn.createStatement();
@@ -66,9 +65,7 @@
             }
             catch(SQLException e1){out.print(e1);}
         }
-
     }
-
 %>
 </body>
 </html>
