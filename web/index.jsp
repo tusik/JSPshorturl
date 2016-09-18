@@ -28,7 +28,7 @@
     rs=sql.executeQuery("SELECT * FROM url");
 %>
 <div class="main">
-<h1>short url beta V0.0.4</h1>
+<h1>short url beta V0.0.5</h1>
 <form method="post" action="in.jsp">
     <label for="name">url:</label>
     <input type="text" name="url" class="form-control"/>

@@ -26,8 +26,9 @@
             out.print("非法字符");
         }else{
             try {
+                String tmppw=DigestUtils.sha1Hex(password);
                 rs=sql.executeQuery("SELECT username,p FROM `user` WHERE pw='"+
-                        DigestUtils.sha1Hex(password)+"'");
+                        tmppw+"'");
                 if(rs.next()&&rs.getString(1).equals(username)){
                     out.print("login s");
                     Date cTime = new Date(session.getCreationTime());
@@ -36,8 +37,13 @@
                     session.setAttribute("power",rs.getString(2));
                     session.setAttribute("loged","true");
                     Cookie name = new Cookie("username", new BASE64Encoder().encode(username.getBytes()));
+                    Cookie pw =
+                            new Cookie(new BASE64Encoder().encode((username+DigestUtils.sha1Hex(SALT)).getBytes()),
+                            DigestUtils.sha512Hex((tmppw+SALT)));
                     name.setMaxAge(60*60*24);
+                    pw.setMaxAge(60*60*24);
                     response.addCookie(name);
+                    response.addCookie(pw);
                     response.sendRedirect("admin.jsp");
                 }else{
                     out.print("f");

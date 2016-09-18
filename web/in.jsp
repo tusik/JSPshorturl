@@ -12,6 +12,7 @@
 <%@ page import="java.util.regex.Pattern" %>
 <%@ page import="java.util.regex.Matcher" %>
 <%@ include file="database.jsp"%>
+<%@include file="iplog.jsp"%>
 <html>
 <head>
     <title>Title</title>
@@ -35,7 +36,6 @@
         if(target==""){
             response.sendRedirect("index.jsp?c=0");
         }else{
-
             try {
                 int count;
                 sql = conn.createStatement();
@@ -52,9 +52,14 @@
                 if (tmp.next()) {
                     commond = 0;
                 } else {
-                    out.print("y");
-                    sql.execute("INSERT INTO url(target,code,ip) VALUES ('" + target + "','" + code + "','"+ip+"')");
-                    commond = 1;
+                    Statement sqlip=conn.createStatement();
+                    Statement sqlip1=conn.createStatement();
+                    if(iplog(ip,sqlip,sqlip1,input_Interval,input_Times)){
+                        sql.execute("INSERT INTO url(target,code,ip) VALUES ('" + target + "','" + code + "','"+ip+"')");
+                        commond = 1;
+                    }else {
+                        commond=0;
+                    }
                 }
                 conn.close();
                 sql.close();

@@ -45,7 +45,7 @@ useUnicode=true&characterEncoding=utf-8 防止中文乱码
             sqlcheck.executeUpdate("INSERT INTO user " +
                     "(username,pw,p)" +
                     "VALUES" +
-                    "('admin','"+DigestUtils.sha1Hex(ADMINPW+SALT)+"','2')");
+                    "('"+ADMINNAME+"','"+DigestUtils.sha1Hex(ADMINPW+SALT)+"','2')");
             sqlcheck.executeUpdate("CREATE TABLE `iplog` (" +
                     "    `ip` VARCHAR(20) NOT NULL," +
                     "    `count` INT(10) NOT NULL DEFAULT '0'," +
