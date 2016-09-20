@@ -66,7 +66,7 @@
                 sql1.close();
                 tmp.close();
                 cou.close();
-                response.sendRedirect("index.jsp?c=" + commond);
+                response.sendRedirect("index.jsp?c=" + commond+"&results="+code);
             }
             catch(SQLException e1){out.print(e1);}
         }

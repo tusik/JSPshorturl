@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ include file="../database.jsp"%>
 <html>
 <head>
     <title>Manager Panel</title>
@@ -48,6 +48,35 @@
     <input type="text" name="id">
     <input type="submit" value="del">
 </form>
+        <%
+            Statement sql = null;    //数据库预处理操作
+            ResultSet rs = null;    //查询要处理结果集
+            sql=conn.createStatement();
+            rs=sql.executeQuery("SELECT * FROM url");
+        %>
+        <table border="0" width="100%" class="table table-striped table-hover">
+            <tr>
+                <th>ID</th>
+                <th>code</th>
+                <th>target</th>
+                <th>date</th>
+                <th>count</th>
+            </tr>
+            <%
+                while(rs.next()){
+                    out.print("<tr>");
+                    out.print("<td>"+rs.getString(1)+"</td>");
+                    out.print("<td><a href="+"u/"+rs.getString(2)+">"+rs.getString(2)+"</a></td>");
+                    out.print("<td>"+rs.getString(3)+"</td>");
+                    out.print("<td>"+rs.getString(4)+"</td>");
+                    out.print("<td>"+rs.getString(5)+"</td>");
+                    out.print("</tr>");
+                }
+                sql.close();
+                conn.close();
+                rs.close();
+            %>
+        </table>
 <p><a href="logout.jsp">退出</a> </p>
 <%
     }else {

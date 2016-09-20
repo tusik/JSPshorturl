@@ -19,52 +19,32 @@
     if(tmp!=null)
          commond= Integer.parseInt(tmp);
     else commond=100;
+    String results=null;
+    results=request.getParameter("results");
+%>
 
-%>
-<%
-    Statement sql = null;    //数据库预处理操作
-    ResultSet rs = null;    //查询要处理结果集
-    sql=conn.createStatement();
-    rs=sql.executeQuery("SELECT * FROM url");
-%>
 <div class="main">
-<h1>short url beta V0.0.5</h1>
+<h1>Short Url <span>beta</span></h1>
 <form method="post" action="in.jsp">
-    <label for="name">url:</label>
-    <input type="text" name="url" class="form-control"/>
-    <p>请带上http头(如http://code.cat)</p>
-    <button type="submit" class="btn btn-default">提交</button>
-
+    <input type="text" name="url" class="form-control itxt" placeholder="请带上http头(如http://code.cat)"/>
+    <button type="submit" class="btn btn-default isubmit">提交</button>
+    <%
+        if(results!=null){
+            String url="Http://by.cx/u/";
+            url+=results;
+            out.print("<h3><a href=\""+url+"\">"+url+"</a></h3>");
+        }
+    %>
+    <p></p>
+    <p>V0.0.6|<a href="http://code.cat">@Image</a> </p>
     <p><%
         if(commond==0)
             out.print("执行失败");
         else if(commond==1)
-            out.print("执行成功");
     %></p>
+
 </form>
-<table border="0" width="100%" class="table table-striped table-hover">
-    <tr>
-        <th>ID</th>
-        <th>code</th>
-        <th>target</th>
-        <th>date</th>
-        <th>count</th>
-    </tr>
-    <%
-        while(rs.next()){
-            out.print("<tr>");
-            out.print("<td>"+rs.getString(1)+"</td>");
-            out.print("<td><a href="+"u/"+rs.getString(2)+">"+rs.getString(2)+"</a></td>");
-            out.print("<td>"+rs.getString(3)+"</td>");
-            out.print("<td>"+rs.getString(4)+"</td>");
-            out.print("<td>"+rs.getString(5)+"</td>");
-            out.print("</tr>");
-        }
-        sql.close();
-        conn.close();
-        rs.close();
-    %>
-</table>
+
 </div>
 </body>
 </html>
