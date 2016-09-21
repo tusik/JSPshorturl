@@ -17,18 +17,12 @@
         String username =request.getParameter("username");
         String password = request.getParameter("password");
         ResultSet rs;
-        Statement sql=conn.createStatement();
-        String tmpU =username.toUpperCase();
-        String tmpP =password.toUpperCase();
-        Matcher m = inStringCheck1.matcher(tmpU);
-        Matcher m1 = inStringCheck1.matcher(tmpP);
-        if(m.matches()||m1.matches()){
-            out.print("非法字符");
-        }else{
+        PreparedStatement sql=null;
             try {
                 String tmppw=DigestUtils.sha1Hex(password);
-                rs=sql.executeQuery("SELECT username,p FROM `user` WHERE pw='"+
-                        tmppw+"'");
+                sql=conn.prepareStatement("SELECT username,p FROM `user` WHERE pw=?");
+                sql.setString(1,tmppw);
+                rs=sql.executeQuery();
                 if(rs.next()&&rs.getString(1).equals(username)){
                     out.print("login s");
                     Date cTime = new Date(session.getCreationTime());
@@ -49,7 +43,10 @@
                     out.print("f");
                 }
             }catch (SQLException e){out.print(e);}
-        }
+            finally {
+                sql.close();
+                conn.close();
+            }
 
     }else{
         response.sendRedirect("admin.jsp");

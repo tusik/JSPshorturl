@@ -18,7 +18,7 @@
     <div class="main">
         <form method="post" action="logincheck.jsp">
             username:<input type="text" name="username"><br>
-            password:<input type="text" name="password"><br>
+            password:<input type="password" name="password"><br>
             <button type="submit" class="btn btn-default" >登陆</button>
         </form>
     </div>

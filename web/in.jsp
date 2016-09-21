@@ -19,18 +19,18 @@
 </head>
 <body>
 <%
-    Statement sql = null;    //数据库预处理操作
+    PreparedStatement sql = null;    //数据库预处理操作
+    PreparedStatement sql2 = null;
     Statement sql1 = null;
     ResultSet tmp=null;
     ResultSet cou=null;
     String ip=request.getRemoteAddr();
     String target =request.getParameter("url");
-    String code=request.getParameter("code");
+    String code=null;
     String tmpS =target.toUpperCase();
-    Matcher m = inStringCheck1.matcher(tmpS);
     Matcher m1 = inStringCheck2.matcher(tmpS);
-    if(m.matches()||!m1.matches()){
-        out.print("非法字符(请按照以下格式输入地址http://code.cat)");
+    if(!m1.matches()){
+        out.print("请按照以下格式输入地址http://code.cat");
     }else{
         int commond =1;
         if(target==""){
@@ -38,9 +38,10 @@
         }else{
             try {
                 int count;
-                sql = conn.createStatement();
+                sql = conn.prepareStatement("SELECT id FROM url WHERE target=? ");
+                sql.setString(1,target);
                 sql1 =conn.createStatement();
-                tmp = sql.executeQuery("SELECT id FROM url WHERE target='" + target + "'");
+                tmp = sql.executeQuery();
                 cou = sql1.executeQuery("SELECT id from url where id = (SELECT max(id) FROM url);");
                 if(cou.next()){
                     count = Integer.parseInt(cou.getString(1));
@@ -50,12 +51,16 @@
                 }
                 code = new BASE64Encoder().encode(Integer.toString(count).getBytes());
                 if (tmp.next()) {
-                    commond = 0;
+                    code=new BASE64Encoder().encode(Integer.toString(tmp.getInt(1)).getBytes());
                 } else {
                     Statement sqlip=conn.createStatement();
                     Statement sqlip1=conn.createStatement();
                     if(iplog(ip,sqlip,sqlip1,input_Interval,input_Times)){
-                        sql.execute("INSERT INTO url(target,code,ip) VALUES ('" + target + "','" + code + "','"+ip+"')");
+                        sql2=conn.prepareStatement("INSERT INTO url(target,code,ip) VALUES (?,?,?)");
+                        sql2.setString(1,target);
+                        sql2.setString(2,code);
+                        sql2.setString(3,ip);
+                        sql2.executeUpdate();
                         commond = 1;
                     }else {
                         commond=0;
