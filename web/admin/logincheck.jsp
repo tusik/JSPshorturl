@@ -24,7 +24,6 @@
                 sql.setString(1,tmppw);
                 rs=sql.executeQuery();
                 if(rs.next()&&rs.getString(1).equals(username)){
-                    out.print("login s");
                     Date cTime = new Date(session.getCreationTime());
                     Date lTime = new Date (session.getLastAccessedTime());
                     session.setAttribute("username",username);
