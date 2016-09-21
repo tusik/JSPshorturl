@@ -7,6 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="org.apache.commons.codec.digest.DigestUtils" %>
+<%
+    Cookie[] cookies = null;
+    cookies=request.getCookies();
+    if(cookies.length-1==0){
+%>
 <html>
 <head>
     <title>Manager Panel</title>
@@ -16,14 +21,18 @@
 <body>
 <div class="container">
     <div class="main">
+        <h3>Manager Panel</h3>
         <form method="post" action="logincheck.jsp">
             username:<input type="text" name="username"><br>
             password:<input type="password" name="password"><br>
             <button type="submit" class="btn btn-default" >登陆</button>
         </form>
     </div>
-
 </div>
-
 </body>
 </html>
+<%
+    }else {
+        response.sendRedirect("logincheck.jsp");
+    }
+%>

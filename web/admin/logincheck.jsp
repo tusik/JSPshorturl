@@ -40,17 +40,14 @@
                     response.addCookie(pw);
                     response.sendRedirect("admin.jsp");
                 }else{
-                    out.print("f");
+                    response.sendRedirect("index.jsp");
                 }
             }catch (SQLException e){out.print(e);}
             finally {
                 sql.close();
                 conn.close();
             }
-
     }else{
-        response.sendRedirect("admin.jsp");
+        response.sendRedirect("index.jsp");
     }
-
-
 %>

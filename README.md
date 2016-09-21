@@ -1,7 +1,10 @@
 # JSPshorturl
-Based on JSP &amp; MYSQL
+Based on JSP & MYSQL
+
+NEED:JDBC https://dev.mysql.com/downloads/connector/j/
 
 0.0.6界面
+
 ![screenshots](https://raw.githubusercontent.com/tusik/JSPshorturl/master/screenshots/0.0.6.png)
 
 0.0.3界面

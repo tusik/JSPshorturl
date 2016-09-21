@@ -2,17 +2,10 @@
 <project version="4">
   <component name="PublishConfigData" serverName="sh.nook.one">
     <serverData>
-      <paths name="sh">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="sh.nook.one">
         <serverdata>
           <mappings>
-            <mapping deploy="/mysql" local="$PROJECT_DIR$" web="/mysql" />
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
