@@ -36,7 +36,7 @@
         }
     %>
     <p></p>
-    <p>V0.1.0|<a href="http://code.cat">@Image</a> </p>
+    <p>V0.1.1|<a href="http://code.cat">@Image</a> </p>
     <p><%
         if(commond==0)
             out.print("执行失败");

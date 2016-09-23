@@ -8,6 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../database.jsp"%>
+<%@include file="logheader.jsp"%>
 <html>
 <head>
     <title>Manager Panel</title>
@@ -18,23 +19,11 @@
 <div class="container">
     <div class="main">
         <%
-            Cookie[] cookies = null;
-            cookies=request.getCookies();
-            String name=null;
-            String username=null;
-            if(cookies.length-1!=0){
-                for(int i=0;i<cookies.length;i++){
-                    if (cookies[i].getName().equals("username")){
-                        name=cookies[i].getValue();
-                        byte[] b=new BASE64Decoder().decodeBuffer(name);
-                        username=new String(b);
-                        out.print("<h1>welcome "+username+"</h1>");
-                    }
-                }
-                if(username==null){
-                    response.sendRedirect("index.jsp");
-                }
-            }
+           if(loged==true){
+               out.print("<h1>welcome "+username+"</h1>");
+            }else {
+                response.sendRedirect("index.jsp");
+           }
         %>
         <%
             if(username!=null){

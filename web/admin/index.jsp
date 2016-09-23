@@ -7,10 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="org.apache.commons.codec.digest.DigestUtils" %>
+<%@ include file="../database.jsp"%>
+<%@include file="logheader.jsp"%>
 <%
-    Cookie[] cookies = null;
-    cookies=request.getCookies();
-    if(cookies.length-1==0){
+
+    if(loged==false){
 %>
 <html>
 <head>
@@ -33,6 +34,6 @@
 </html>
 <%
     }else {
-        response.sendRedirect("logincheck.jsp");
+        response.sendRedirect("admin.jsp");
     }
 %>

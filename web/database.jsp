@@ -28,7 +28,7 @@ useUnicode=true&characterEncoding=utf-8 防止中文乱码
 
     }else {
         try {
-            sqlcheck.executeUpdate("CREATE TABLE `url`(" +
+            sqlcheck.executeUpdate("CREATE TABLE IF NOT EXISTS `url`(" +
                     "`id` INT(11) NOT NULL  AUTO_INCREMENT," +
                     "`code` VARCHAR(100) NOT NULL," +
                     "`target` VARCHAR(400) NOT NULL," +
@@ -36,17 +36,17 @@ useUnicode=true&characterEncoding=utf-8 防止中文乱码
                     "`count` INT(10) NOT NULL DEFAULT '0'," +
                     " PRIMARY KEY (`id`));" );
             sqlcheck.executeUpdate(
-                    "CREATE TABLE `user` (" +
+                    "CREATE TABLE IF NOT EXISTS `user` (" +
                             "`id` INT(11) NOT NULL AUTO_INCREMENT," +
                             "`username` char(20) NOT NULL," +
                             "`pw` varchar(255) NOT NULL," +
                             "`p` int(10) NOT NULL DEFAULT '1'," +
                             "PRIMARY KEY (`id`))");
-            sqlcheck.executeUpdate("INSERT INTO user " +
+            sqlcheck.executeUpdate("INSERT INTO IF NOT EXISTS  user " +
                     "(username,pw,p)" +
                     "VALUES" +
                     "('"+ADMINNAME+"','"+DigestUtils.sha1Hex(ADMINPW+SALT)+"','2')");
-            sqlcheck.executeUpdate("CREATE TABLE `iplog` (" +
+            sqlcheck.executeUpdate("CREATE TABLE IF NOT EXISTS `iplog` (" +
                     "    `ip` VARCHAR(20) NOT NULL," +
                     "    `count` INT(10) NOT NULL DEFAULT '0'," +
                     "    `id` INT(11) NOT NULL AUTO_INCREMENT," +
