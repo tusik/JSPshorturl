@@ -10,6 +10,7 @@
     <title>shrot URL beta</title>
     <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+    <script type="text/javascript" src="send.js"></script>
 </head>
 <body>
 
@@ -25,18 +26,19 @@
 
 <div class="main">
 <h1>Short Url <span>beta</span></h1>
-<form method="post" action="in.jsp">
-    <input type="text" name="url" class="form-control itxt" placeholder="请带上http头(如http://code.cat)"/>
-    <button type="submit" class="btn btn-default isubmit">提交</button>
-    <%
+<form method="post" onsubmit="return submitbtn_click()">
+    <input type="text"  name="url" id="url" class="form-control itxt" placeholder="请带上http头(如http://code.cat)"/>
+    <button id="submit" onclick="sendurl()" class="btn btn-default isubmit">提交</button>
+    <h3><span id="surl"></span></h3>
+    <%--<%
         if(results!=null){
             String url="Http://by.cx/u/";
             url+=results;
             out.print("<h3><a href=\""+url+"\">"+url+"</a></h3>");
         }
-    %>
+    %>--%>
     <p></p>
-    <p>V0.1.1|<a href="http://code.cat">@Image</a> </p>
+    <p>V0.1.5|<a href="http://code.cat">@Image</a> </p>
     <p><%
         if(commond==0)
             out.print("执行失败");

@@ -13,19 +13,17 @@
 <%@ page import="java.util.regex.Matcher" %>
 <%@ include file="database.jsp"%>
 <%@include file="iplog.jsp"%>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
 <%
+    response.setHeader("Cache-Control","no-store");//HTTP1.1
+    response.setHeader("Pragma","no-cache");//HTTP1.0
+    response.setDateHeader("Expires",0);//禁止在服务器中缓存
     PreparedStatement sql = null;    //数据库预处理操作
     PreparedStatement sql2 = null;
     Statement sql1 = null;
     ResultSet tmp=null;
     ResultSet cou=null;
     String ip=request.getRemoteAddr();
-    String target =request.getParameter("url");
+    String target =request.getParameter("value");
     String code=null;
     String tmpS =target.toUpperCase();
     Matcher m1 = inStringCheck2.matcher(tmpS);
@@ -71,11 +69,12 @@
                 sql1.close();
                 tmp.close();
                 cou.close();
-                response.sendRedirect("index.jsp?c=" + commond+"&results="+code);
+                out.clear();
+                response.getWriter().write(code);//模拟数据写回
+               // response.sendRedirect("index.jsp?c=" + commond+"&results="+code);
             }
             catch(SQLException e1){out.print(e1);}
         }
     }
 %>
-</body>
-</html>
+
