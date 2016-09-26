@@ -23,7 +23,7 @@ function callback(){
 // alert(xmlhttp.responseXML);//相应返回的xml
         if (xmlhttp.responseText!=null){//这里直接判断不为空,应该根据数据库返回值来进行不同的显示
             var spanid = document.getElementById("surl");
-            var url="http://by.cx/u"+xmlhttp.responseText;
+            var url="http://by.cx/u/"+xmlhttp.responseText;
             spanid.innerHTML ='<a href=\"'+url+'\">'+url+'</a>';
         }
     }
