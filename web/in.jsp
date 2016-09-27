@@ -17,13 +17,18 @@
     response.setHeader("Cache-Control","no-store");//HTTP1.1
     response.setHeader("Pragma","no-cache");//HTTP1.0
     response.setDateHeader("Expires",0);//禁止在服务器中缓存
+    String target =request.getParameter("value");//接收数据
+    if(target==null){
+        out.println("illegal");
+        return;
+    }
     PreparedStatement sql = null;    //数据库预处理操作
     PreparedStatement sql2 = null;
     Statement sql1 = null;
     ResultSet tmp=null;
     ResultSet cou=null;
     String ip=request.getRemoteAddr();
-    String target =request.getParameter("value");
+
     String code=null;
     String tmpS =target.toUpperCase();
     Matcher m1 = inStringCheck2.matcher(tmpS);

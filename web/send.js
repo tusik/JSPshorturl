@@ -4,17 +4,18 @@
 var xmlhttp;
 function sendurl(){
     var value = document.getElementById("url").value;
-//兼容性写法创建请求实例,IE5 6支持else里面的方法
-    if (window.XMLHttpRequest){
-        xmlhttp = new XMLHttpRequest();
-    }else {
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
+    if(value!=null&&value.toUpperCase().match("(HTTP://|HTTPS://)")){
+        //兼容性写法创建请求实例,IE5 6支持else里面的方法
+        if (window.XMLHttpRequest){
+            xmlhttp = new XMLHttpRequest();
+        }else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
 //设置传送方式,地址,以及同步还是异步
-    xmlhttp.open("GET","in.jsp?value="+escape(value),false);
-    xmlhttp.onreadystatechange = callback;//状态改变的时候执行这个函数,用来判断是否请求完毕
-    xmlhttp.send();//请求服务器
-    return false;
+        xmlhttp.open("GET","in.jsp?value="+escape(value),false);
+        xmlhttp.onreadystatechange = callback;//状态改变的时候执行这个函数,用来判断是否请求完毕
+        xmlhttp.send();//请求服务器
+    }
 }
 function callback(){
 //请求完成表示

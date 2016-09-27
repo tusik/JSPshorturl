@@ -5,11 +5,11 @@
   Time: 22:09
   To change this template use File | Settings | File Templates.
 --%>
-<!--
+<%--
 JDBC 驱动名及数据库 URL
 数据库的用户名与密码，需要根据自己的设置
 useUnicode=true&characterEncoding=utf-8 防止中文乱码
--->
+--%>
 <%@page import="org.apache.commons.codec.digest.DigestUtils" %>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@include file="config.jsp"%>
