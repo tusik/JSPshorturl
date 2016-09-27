@@ -3,32 +3,30 @@
   User: zinc
   Date: 2016/9/1
   Time: 11:52
-  To change this template use File | Settings | File Templates.
+  跳转文件
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ include file="database.jsp"%>
-<html>
-<head>
-    <title>jump</title>
-</head>
-<body>
 <%
     String code =request.getParameter("c");//参数
-    Statement sql = null;    //数据库预处理操作
+    PreparedStatement sql = null;    //数据库预处理操作
     ResultSet rs = null;    //查询要处理结果集
     try{
-        sql=conn.createStatement();
-        rs=sql.executeQuery( "SELECT target,count FROM url WHERE code='"+code+"'");
+        sql=conn.prepareStatement( "SELECT target,count FROM url WHERE code=?");//查询是否有目标数据
+        sql.setString(1,code);
+        rs=sql.executeQuery();
         if(rs.next()){
             String target=rs.getString(1);
             int count=Integer.parseInt(rs.getString(2));
             count++;
-            sql.executeUpdate("UPDATE url SET count='"+count+"' WHERE code='"+code+"'");
+            sql=conn.prepareStatement("UPDATE url SET count=? WHERE code=?");//更新点击次数
+            sql.setString(1,Integer.toString(count));
+            sql.setString(2,code);
+            sql.executeUpdate();
             response.sendRedirect(target);
         }else{
-            out.print("code NOT FOUND!");
+            response.sendRedirect("../error.jsp");
         }
         conn.close();
         sql.close();
@@ -36,5 +34,3 @@
     }
     catch(SQLException e1){out.print(e1);}
 %>
-</body>
-</html>
