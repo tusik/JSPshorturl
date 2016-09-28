@@ -16,6 +16,7 @@
         int rs;
         sql=conn.createStatement();
         rs=sql.executeUpdate("DELETE FROM `url` WHERE id='"+targetID+"'");
+        sql.close();
         if(rs==1){
             response.sendRedirect("admin.jsp?c=1");
         }else {

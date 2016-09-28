@@ -19,7 +19,7 @@
         ResultSet rs;
         PreparedStatement sql=null;
             try {
-                String tmppw=DigestUtils.sha1Hex(password);
+                String tmppw=DigestUtils.sha1Hex(password+SALT);
                 sql=conn.prepareStatement("SELECT username,p FROM `user` WHERE pw=?");
                 sql.setString(1,tmppw);
                 rs=sql.executeQuery();
@@ -37,15 +37,13 @@
                     pw.setMaxAge(60*60*24);
                     response.addCookie(name);
                     response.addCookie(pw);
+                    sql.close();
+                    conn.close();
                     response.sendRedirect("admin.jsp");
                 }else{
                     response.sendRedirect("index.jsp");
                 }
             }catch (SQLException e){out.print(e);}
-            finally {
-                sql.close();
-                conn.close();
-            }
     }else{
         response.sendRedirect("index.jsp");
     }

@@ -27,13 +27,17 @@
                 sql.setString(1,Integer.toString(count));
                 sql.setString(2,code);
                 sql.executeUpdate();
+                conn.close();
+                sql.close();
+                rs.close();
                 response.sendRedirect(target);
             }else{
+                conn.close();
+                sql.close();
+                rs.close();
                 response.sendRedirect("../error.jsp");
             }
-            conn.close();
-            sql.close();
-            rs.close();
+
         }
         catch(SQLException e1){out.print(e1);}
     }

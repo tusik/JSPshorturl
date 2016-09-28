@@ -26,8 +26,6 @@
                 response.addCookie(cookies[i]);
             }
         }
-
-
         response.sendRedirect("index.jsp");
     }
 %>

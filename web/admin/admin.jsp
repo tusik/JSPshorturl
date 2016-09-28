@@ -41,6 +41,7 @@
                     ResultSet rs = null;    //查询要处理结果集
                     sql=conn.createStatement();
                     rs=sql.executeQuery("SELECT * FROM url");
+
                 %>
                 <table border="0" width="100%" class="table table-striped table-hover">
                     <tr>
@@ -67,6 +68,7 @@
                 </table>
         <p><a href="logout.jsp">退出</a> </p>
         <%
+                sql.close();
             }else {
                 response.sendRedirect("index.jsp");
             }

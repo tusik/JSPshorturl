@@ -34,10 +34,13 @@
         }
         if(tmppw==null||username==null){
             loged=false;
+            getPw.close();
         }else if((hasPw.next())&&DigestUtils.sha512Hex((hasPw.getString(1)+SALT)).equals(tmppw)){
             loged=true;
+            getPw.close();
         }else{
             loged=false;
+            getPw.close();
         }
     }
 

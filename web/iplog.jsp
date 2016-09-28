@@ -22,17 +22,22 @@
                     int c=rs.getInt(1);
                     c++;
                     sql1.execute("UPDATE iplog SET count='"+c+"'WHERE ip='"+ip+"'");//更新数据库
+                    sql1.close();
+                    sql.close();//关闭连接
                     return true;
                 }else {
+                    sql1.close();
+                    sql.close();//关闭连接
                     return false;
                 }
             }
         }else {//为空则在数据库中为此ip创建一条数据
             sql1.execute("INSERT INTO iplog(ip,count) VALUES ('"+ip+"','1')");
+            sql1.close();
+            sql.close();//关闭连接
             return true;
         }
-        sql1.close();
-        sql.close();//关闭连接
+
         return  true;
     }
 %>
