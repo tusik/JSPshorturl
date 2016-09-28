@@ -36,11 +36,11 @@ NEED:JDBC https://dev.mysql.com/downloads/connector/j/
 
 ##伪静态
 
-在WEB-INF的urlrewrite.xml文件添加规则
+在WEB-INF的urlrewrite.xml转向规则
 
 ```
 <rule>
-    <from>/u/(.*)</from>
+    <from>/u(.*)</from>
     <to >/t.jsp?c=$1</to>
 </rule>
 ```

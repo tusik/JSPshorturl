@@ -1,6 +1,6 @@
 <urlrewrite>
     <rule>
-        <from>/u/(.*)</from>
+        <from>/u(.*)</from>
         <to >/t.jsp?c=$1</to>
     </rule>
     <outbound-rule>

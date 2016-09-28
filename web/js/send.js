@@ -24,11 +24,7 @@ function callback(){
 // alert(xmlhttp.responseXML);//相应返回的xml
         if (xmlhttp.responseText!=null){//这里直接判断不为空,应该根据数据库返回值来进行不同的显示
             var spanid = document.getElementById("surl");
-            if(location.port!=80){
-                var url="http://"+document.domain+":"+location.port+"/u/"+xmlhttp.responseText;
-            }else {
-                var url="http://"+document.domain+"/u/"+xmlhttp.responseText;
-            }
+            var url="http://"+document.domain+"/u"+xmlhttp.responseText;
             spanid.innerHTML ='<a href=\"'+url+'\">'+url+'</a>';
         }
     }
