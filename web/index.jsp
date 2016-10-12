@@ -42,7 +42,23 @@
             out.print("<h3><a href=\""+url+"\">"+url+"</a></h3>");
         }
     %>--%>
-    <p></p>
+    <%
+        ResultSet rs=null;
+        ResultSet time=null;
+        Statement sql = conn.createStatement();
+
+        rs=sql.executeQuery("SELECT COUNT(*) from `url`");
+        if(rs.next()){
+            out.print("<p>已记录"+rs.getString(1)+"条数据,");
+        }
+        rs=sql.executeQuery("SELECT SUM(count) FROM `url`");
+        if(rs.next()){
+            out.print("跳转"+rs.getString(1)+"次</p>");
+        }
+        rs.close();
+        sql.close();
+    %>
+
 
 
 </form>
