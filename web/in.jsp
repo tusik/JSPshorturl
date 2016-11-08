@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="sun.misc.BASE64Decoder,sun.misc.BASE64Encoder"%>
+<%@ page import="org.apache.commons.lang3.*" %>
 <%@ page import="java.util.regex.Matcher" %>
 <%@ include file="database.jsp"%>
 <%@include file="iplog.jsp"%>
@@ -47,9 +48,9 @@
             } else {
                 count = 1;
             }
-            code = new BASE64Encoder().encode(Integer.toString(count).getBytes());//base64编码
+            code = RandomStringUtils.randomAlphanumeric(5);
             if (tmp.next()) {//若数据库为空，编码从1开始
-                code = new BASE64Encoder().encode(Integer.toString(tmp.getInt(1)).getBytes());
+                code = RandomStringUtils.randomAlphanumeric(5);
             } else {
                 Statement sqlip = conn.createStatement();
                 Statement sqlip1 = conn.createStatement();//创建数据库链接用于处理ip
@@ -69,11 +70,10 @@
             sql1.close();
             tmp.close();
             cou.close();
-            out.clear();
             response.getWriter().write(code);//模拟数据写回
             // response.sendRedirect("index.jsp?c=" + commond+"&results="+code);
         } catch (SQLException e1) {
-            out.print(e1);
+            e1.printStackTrace();
         }
     }
 %>

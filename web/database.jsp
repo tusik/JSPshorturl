@@ -49,7 +49,7 @@ useUnicode=true&characterEncoding=utf-8 防止中文乱码
                     "    `id` INT(11) NOT NULL AUTO_INCREMENT," +
                     "    `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP," +
                     "    PRIMARY KEY (`id`))");
-        }catch (SQLException e){out.print(e);}
+        }catch (SQLException e){e.printStackTrace();}
 
     }
     check.close();
